@@ -2,6 +2,8 @@ package vice
 
 import "golang.org/x/xerrors"
 
+// Is reports whether any error in err's chain implements the behaviour
+// described by the provided Vice, v.
 func Is(err error, v Vice) bool {
 	switch v {
 	case Timeout:
