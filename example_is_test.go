@@ -20,7 +20,7 @@ func someDatabaseOperation() error {
 	return &DatabaseError{closed: true}
 }
 
-func ExampleIs_checking_other_implementors() {
+func ExampleIs_checkingOtherImplementors() {
 	if err := someDatabaseOperation(); vice.Is(err, vice.Closed) {
 		fmt.Println("database is already closed")
 	}
