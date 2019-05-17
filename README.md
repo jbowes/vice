@@ -18,7 +18,7 @@
 
 
 ## Introduction
-Introduction | [Examples] | [Contributing] <br /><br />
+Introduction | [Examples] | [Usage] | [Contributing] <br /><br />
 
 🚧 ___Disclaimer___: _`vice` is alpha quality software. The API may change
 without warning between revisions._ 🚧
@@ -27,9 +27,47 @@ without warning between revisions._ 🚧
 
 
 ## Examples
-[Introduction] | Examples | [Contributing] <br /><br />
+[Introduction] | Examples | [Usage] | [Contributing] <br /><br />
+
+*Create an error that implements `NotFound() bool`:*
+```go
+vice.New(vice.NotFound, "user not found")
+```
+
+*Wrap an existing error, and add `Timeout() bool`:*
+```go
+vice.Wrap(err, vice.Timeout, "request timed out")
+```
 
 For complete examples and usage, see the [GoDoc documentation](https://godoc.org/github.com/jbowes/vice).
+
+
+## Usage
+[Introduction] | [Examples] | Usage | [Contributing] <br /><br />
+
+`vice` defines common types of errors, as seen in existing packages, as expressed
+through methods on the errors of the form:
+```go
+IsXXX() bool
+```
+
+Errors of these types can be created and checked by vice. When used with Go 2
+error value wrapping, intermediate code layers don't have to know about the
+behaviours or types of errors, and may add additional information, without
+altering how the error is handled in the topmost layer:
+
+```go
+// Create an error when your database can't find a user record
+err := vice.New(vice.NotFound, "user not found")
+
+// many intermediate layers of code, passing the error on, and wrapping it
+// ...
+
+// In your central request handler middleware
+if vice.Is(err, vice.NotFound) {
+	// respond appropriately to the client
+}
+```
 
 ### Building APIs on `vice`
 
