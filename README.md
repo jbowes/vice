@@ -45,9 +45,6 @@ I would love your help!
 
 `vice` is still a work in progress. You can help by:
 
-- Trying `oag` against different [OpenAPI] documents, and [reporting bugs][bug]
-  when the generated code is broken, or [suggesting improvements][enhancement]
-  to the generated code.
 - Opening a pull request to resolve an [open issue][issues].
 - Adding a feature or enhancement of your own! If it might be big, please
   [open an issue][enhancement] first so we can discuss it.
