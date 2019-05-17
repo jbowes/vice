@@ -1,5 +1,7 @@
 package skip
 
+// Vice is the type used to enumerate all common behaviours for errors.
+// It is mirrored with the main vice package.
 type Vice uint64
 
 // These values are mirrored with the main vice package.

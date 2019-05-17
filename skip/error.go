@@ -6,26 +6,58 @@ import (
 	"golang.org/x/xerrors"
 )
 
+// New returns an error that formats as the given text, and implements the
+// behaviour described by the given Vice.
+//
+// The returned error contains a Frame set to the caller's location and
+// implements Formatter to show this information when printed with details.
 func New(v Vice, skip uint, text string) error {
 	return sealed(&sealError{msg: text}, v, skip)
 }
 
+// Errorf returns an error that formats as the format specifier text, and
+// implements the behaviour described by the given Vice.
+//
+// The returned error contains a Frame set to the caller's location and
+// implements Formatter to show this information when printed with details.
 func Errorf(v Vice, skip uint, format string, a ...interface{}) error {
 	return sealed(&sealError{msg: fmt.Sprintf(format, a...)}, v, skip)
 }
 
+// Wrap returns an error wrapping err with the supplied message, and a frame
+// from the caller's stack. The returned error implements the behaviour
+// described by the given Vice. If err is nil, Wrap returns nil.
+//
+// The error returned implments the Unwrap method, for programatically
+// extracting the error chain.
 func Wrap(err error, v Vice, skip uint, text string) error {
 	return wrapped(&wrapError{sealError{err: err, msg: text}}, v, skip)
 }
 
+// Wrapf returns an error wrapping err with the supplied format specifier, and
+// a frame from the caller's stack. The returned error implements the behaviour
+// described by the given Vice. If err is nil, Wrap returns nil.
+//
+// The error returned implments the Unwrap method, for programatically
+// extracting the error chain.
 func Wrapf(err error, v Vice, skip uint, format string, a ...interface{}) error {
 	return wrapped(&wrapError{sealError{err: err, msg: fmt.Sprintf(format, a...)}}, v, skip)
 }
 
+// Seal returns an error wrapping err with the supplied message, and
+// a frame from the caller's stack. The returned error implements the behaviour
+// described by the given Vice. If err is nil, Wrap returns nil.
+//
+// The error returned does not implment the Unwrap method.
 func Seal(err error, v Vice, skip uint, text string) error {
 	return sealed(&sealError{err: err, msg: text}, v, skip)
 }
 
+// Sealf returns an error wrapping err with the supplied format specifier, and
+// a frame from the caller's stack. The returned error implements the behaviour
+// described by the given Vice. If err is nil, Wrap returns nil.
+//
+// The error returned does not implment the Unwrap method.
 func Sealf(err error, v Vice, skip uint, format string, a ...interface{}) error {
 	return sealed(&sealError{err: err, msg: fmt.Sprintf(format, a...)}, v, skip)
 }
