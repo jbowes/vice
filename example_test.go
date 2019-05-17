@@ -13,7 +13,7 @@ func ExampleIs() {
 	// Output: true
 }
 
-func ExampleIs_error_chain() {
+func ExampleIs_errorChain() {
 	err := vice.New(vice.Timeout, "request timed out")
 	err2 := vice.Wrap(err, vice.Closed, "connection closed")
 
