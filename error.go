@@ -20,7 +20,7 @@ func Errorf(v Vice, format string, a ...interface{}) error {
 	return skip.Errorf(skip.Vice(v), 1, format, a...)
 }
 
-// Wrap returns an error wrapping err with the supplied message, and a frame
+// Wrap returns an error wrapping err with the supplied text, and a frame
 // from the caller's stack. The returned error implements the behaviour
 // described by the given Vice. If err is nil, Wrap returns nil.
 //
@@ -40,7 +40,7 @@ func Wrapf(err error, v Vice, format string, a ...interface{}) error {
 	return skip.Wrapf(err, skip.Vice(v), 1, format, a...)
 }
 
-// Seal returns an error wrapping err with the supplied message, and
+// Seal returns an error wrapping err with the supplied text, and
 // a frame from the caller's stack. The returned error implements the behaviour
 // described by the given Vice. If err is nil, Wrap returns nil.
 //

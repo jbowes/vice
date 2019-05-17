@@ -18,10 +18,9 @@ func New(v Vice, skip uint, text string) error {
 	return sealed(&sealError{msg: text}, v, skip)
 }
 
-// Errorf returns an error that formats as the format specifier text, and
-// implements the behaviour described by the given Vice. The argument skip is
-// the number of frames to skip over. Caller(0) returns the frame for the
-// caller of Errorf.
+// Errorf returns an error that formats as the format specifier, and implements
+// the behaviour described by the given Vice. The argument skip is  the number
+// of frames to skip over. Caller(0) returns the frame for the caller of Errorf.
 //
 // The returned error contains a Frame set to the caller's location and
 // implements Formatter to show this information when printed with details.
@@ -31,7 +30,7 @@ func Errorf(v Vice, skip uint, format string, a ...interface{}) error {
 	return sealed(&sealError{msg: fmt.Sprintf(format, a...)}, v, skip)
 }
 
-// Wrap returns an error wrapping err with the supplied message, and a frame
+// Wrap returns an error wrapping err with the supplied text, and a frame
 // from the caller's stack. The returned error implements the behaviour
 // described by the given Vice. The argument skip is the number of frames to
 // skip over. Caller(0) returns the frame for the caller of Wrap. If err is
@@ -59,7 +58,7 @@ func Wrapf(err error, v Vice, skip uint, format string, a ...interface{}) error 
 	return wrapped(&wrapError{sealError{err: err, msg: fmt.Sprintf(format, a...)}}, v, skip)
 }
 
-// Seal returns an error wrapping err with the supplied message, and a frame
+// Seal returns an error wrapping err with the supplied text, and a frame
 // from the caller's stack. The returned error implements the behaviour
 // described by the given Vice. The argument skip is the number of frames to
 // skip over. Caller(0) returns the frame for the caller of Seal. If err is
