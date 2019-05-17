@@ -7,57 +7,80 @@ import (
 )
 
 // New returns an error that formats as the given text, and implements the
-// behaviour described by the given Vice.
+// behaviour described by the given Vice. The argument skip is the number of
+// frames to skip over. Caller(0) returns the frame for the caller of New.
 //
 // The returned error contains a Frame set to the caller's location and
 // implements Formatter to show this information when printed with details.
+//
+// This func is intended to be used for implementing APIs on top of vice.
 func New(v Vice, skip uint, text string) error {
 	return sealed(&sealError{msg: text}, v, skip)
 }
 
 // Errorf returns an error that formats as the format specifier text, and
-// implements the behaviour described by the given Vice.
+// implements the behaviour described by the given Vice. The argument skip is
+// the number of frames to skip over. Caller(0) returns the frame for the
+// caller of Errorf.
 //
 // The returned error contains a Frame set to the caller's location and
 // implements Formatter to show this information when printed with details.
+//
+// This func is intended to be used for implementing APIs on top of vice.
 func Errorf(v Vice, skip uint, format string, a ...interface{}) error {
 	return sealed(&sealError{msg: fmt.Sprintf(format, a...)}, v, skip)
 }
 
 // Wrap returns an error wrapping err with the supplied message, and a frame
 // from the caller's stack. The returned error implements the behaviour
-// described by the given Vice. If err is nil, Wrap returns nil.
+// described by the given Vice. The argument skip is the number of frames to
+// skip over. Caller(0) returns the frame for the caller of Wrap. If err is
+// nil, Wrap returns nil.
 //
 // The error returned implments the Unwrap method, for programatically
 // extracting the error chain.
+//
+// This func is intended to be used for implementing APIs on top of vice.
 func Wrap(err error, v Vice, skip uint, text string) error {
 	return wrapped(&wrapError{sealError{err: err, msg: text}}, v, skip)
 }
 
 // Wrapf returns an error wrapping err with the supplied format specifier, and
 // a frame from the caller's stack. The returned error implements the behaviour
-// described by the given Vice. If err is nil, Wrap returns nil.
+// described by the given Vice. The argument skip is the number of frames to
+// skip over. Caller(0) returns the frame for the caller of Wrapf. If err is
+// nil, Wrapf returns nil.
 //
 // The error returned implments the Unwrap method, for programatically
 // extracting the error chain.
+//
+// This func is intended to be used for implementing APIs on top of vice.
 func Wrapf(err error, v Vice, skip uint, format string, a ...interface{}) error {
 	return wrapped(&wrapError{sealError{err: err, msg: fmt.Sprintf(format, a...)}}, v, skip)
 }
 
-// Seal returns an error wrapping err with the supplied message, and
-// a frame from the caller's stack. The returned error implements the behaviour
-// described by the given Vice. If err is nil, Wrap returns nil.
+// Seal returns an error wrapping err with the supplied message, and a frame
+// from the caller's stack. The returned error implements the behaviour
+// described by the given Vice. The argument skip is the number of frames to
+// skip over. Caller(0) returns the frame for the caller of Seal. If err is
+// nil, Seal returns nil.
 //
 // The error returned does not implment the Unwrap method.
+//
+// This func is intended to be used for implementing APIs on top of vice.
 func Seal(err error, v Vice, skip uint, text string) error {
 	return sealed(&sealError{err: err, msg: text}, v, skip)
 }
 
 // Sealf returns an error wrapping err with the supplied format specifier, and
 // a frame from the caller's stack. The returned error implements the behaviour
-// described by the given Vice. If err is nil, Wrap returns nil.
+// described by the given Vice. The argument skip is the number of frames to
+// skip over. Caller(0) returns the frame for the caller of Sealf. If err is
+// nil, Sealfreturns nil.
 //
 // The error returned does not implment the Unwrap method.
+//
+// This func is intended to be used for implementing APIs on top of vice.
 func Sealf(err error, v Vice, skip uint, format string, a ...interface{}) error {
 	return sealed(&sealError{err: err, msg: fmt.Sprintf(format, a...)}, v, skip)
 }
