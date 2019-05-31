@@ -41,6 +41,9 @@ func Errorf(v Vice, skip uint, format string, a ...interface{}) error {
 //
 // This func is intended to be used for implementing APIs on top of vice.
 func Wrap(err error, v Vice, skip uint, text string) error {
+	if err == nil {
+		return nil
+	}
 	return wrapped(&wrapError{sealError{err: err, msg: text}}, v, skip)
 }
 
@@ -55,6 +58,9 @@ func Wrap(err error, v Vice, skip uint, text string) error {
 //
 // This func is intended to be used for implementing APIs on top of vice.
 func Wrapf(err error, v Vice, skip uint, format string, a ...interface{}) error {
+	if err == nil {
+		return nil
+	}
 	return wrapped(&wrapError{sealError{err: err, msg: fmt.Sprintf(format, a...)}}, v, skip)
 }
 
@@ -68,6 +74,9 @@ func Wrapf(err error, v Vice, skip uint, format string, a ...interface{}) error 
 //
 // This func is intended to be used for implementing APIs on top of vice.
 func Seal(err error, v Vice, skip uint, text string) error {
+	if err == nil {
+		return nil
+	}
 	return sealed(&sealError{err: err, msg: text}, v, skip)
 }
 
@@ -81,6 +90,9 @@ func Seal(err error, v Vice, skip uint, text string) error {
 //
 // This func is intended to be used for implementing APIs on top of vice.
 func Sealf(err error, v Vice, skip uint, format string, a ...interface{}) error {
+	if err == nil {
+		return nil
+	}
 	return sealed(&sealError{err: err, msg: fmt.Sprintf(format, a...)}, v, skip)
 }
 
