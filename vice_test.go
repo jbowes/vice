@@ -32,3 +32,20 @@ func TestVice(t *testing.T) {
 		}
 	}
 }
+
+func TestWrapNil(t *testing.T) {
+	inner := errors.New("no auth")
+	wrapped := Wrap(inner, AuthRequired, "wrapping")
+
+	if wrapped == nil {
+		t.Error("Wrapped error should not be nil")
+	}
+
+	maybeError := func() error {
+		return nil
+	}()
+	wrapped = Wrap(maybeError, Conflict, "try wrapping")
+	if wrapped != nil {
+		t.Error("Wrapping a nil error should return nil")
+	}
+}
