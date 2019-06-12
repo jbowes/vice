@@ -117,6 +117,8 @@ func sealed(serr *sealError, v Vice, skip uint) error {
 		return &invalidArgumentSeal{*serr}
 	case NotFound:
 		return &notFoundErrorSeal{*serr}
+	case Internal:
+		return &internalSeal{*serr}
 	default:
 		return serr
 	}
@@ -143,6 +145,8 @@ func wrapped(werr *wrapError, v Vice, skip uint) error {
 		return &invalidArgumentWrap{*werr}
 	case NotFound:
 		return &notFoundErrorWrap{*werr}
+	case Internal:
+		return &internalWrap{*werr}
 	default:
 		return werr
 	}

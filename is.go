@@ -24,6 +24,8 @@ func Is(err error, v Vice) bool {
 		return isInvalidArgument(err)
 	case NotFound:
 		return isNotFound(err)
+	case Internal:
+		return isInternal(err)
 	default:
 		return false
 	}
@@ -97,6 +99,14 @@ func isNotFound(err error) bool {
 	var e interface{ NotFound() bool }
 	if xerrors.As(err, &e) {
 		return e.NotFound()
+	}
+	return false
+}
+
+func isInternal(err error) bool {
+	var e interface{ Internal() bool }
+	if xerrors.As(err, &e) {
+		return e.Internal()
 	}
 	return false
 }
