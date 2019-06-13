@@ -27,4 +27,5 @@ const (
 	Conflict
 	InvalidArgument
 	NotFound
+	Internal
 )
