@@ -17,6 +17,7 @@ func TestVice(t *testing.T) {
 		InvalidArgument,
 		NotFound,
 		Internal,
+		Canceled,
 	}
 
 	for _, v := range vices {
