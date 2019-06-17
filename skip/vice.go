@@ -17,6 +17,7 @@ const (
 	InvalidArgument
 	NotFound
 	Internal
+	Canceled
 )
 
 // implementations of all the error types
@@ -60,6 +61,10 @@ type internalSeal struct{ sealError }
 
 func (internalSeal) Internal() bool { return true }
 
+type canceledSeal struct{ sealError }
+
+func (canceledSeal) Canceled() bool { return true }
+
 // wrapped implmentations of all the error types
 
 type timeoutWrap struct{ wrapError }
@@ -101,3 +106,7 @@ func (notFoundErrorWrap) NotFound() bool { return true }
 type internalWrap struct{ wrapError }
 
 func (internalWrap) Internal() bool { return true }
+
+type canceledWrap struct{ wrapError }
+
+func (canceledWrap) Canceled() bool { return true }

@@ -26,6 +26,8 @@ func Is(err error, v Vice) bool {
 		return isNotFound(err)
 	case Internal:
 		return isInternal(err)
+	case Canceled:
+		return isCanceled(err)
 	default:
 		return false
 	}
@@ -107,6 +109,14 @@ func isInternal(err error) bool {
 	var e interface{ Internal() bool }
 	if xerrors.As(err, &e) {
 		return e.Internal()
+	}
+	return false
+}
+
+func isCanceled(err error) bool {
+	var e interface{ Canceled() bool }
+	if xerrors.As(err, &e) {
+		return e.Canceled()
 	}
 	return false
 }
