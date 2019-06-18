@@ -28,6 +28,8 @@ func Is(err error, v Vice) bool {
 		return isInternal(err)
 	case Canceled:
 		return isCanceled(err)
+	case NoVice:
+		return isNoVice(err)
 	default:
 		return false
 	}
@@ -119,4 +121,14 @@ func isCanceled(err error) bool {
 		return e.Canceled()
 	}
 	return false
+}
+
+func isNoVice(err error) bool {
+	for _, v := range vices {
+		if Is(err, v) {
+			return false
+		}
+	}
+
+	return true
 }

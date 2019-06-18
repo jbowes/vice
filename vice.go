@@ -62,3 +62,19 @@ const (
 	// consumer.
 	Canceled
 )
+
+// vices is a fixed length slice of Vice verbs used to iterate over them
+// accordingly. It only contains actual vices, NoVice is not included.
+var vices = [...]Vice{
+	Timeout,
+	Temporary,
+	Closed,
+	AuthRequired,
+	AuthFailed,
+	Permission,
+	Conflict,
+	InvalidArgument,
+	NotFound,
+	Internal,
+	Canceled,
+}

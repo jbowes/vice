@@ -6,20 +6,6 @@ import (
 )
 
 func TestVice(t *testing.T) {
-	vices := []Vice{
-		Timeout,
-		Temporary,
-		Closed,
-		AuthRequired,
-		AuthFailed,
-		Permission,
-		Conflict,
-		InvalidArgument,
-		NotFound,
-		Internal,
-		Canceled,
-	}
-
 	for _, v := range vices {
 		err := New(v, "test")
 		if !Is(err, v) {
@@ -33,6 +19,27 @@ func TestVice(t *testing.T) {
 			t.Error("Did not create correct error form")
 		}
 	}
+}
+
+func TestNoVice(t *testing.T) {
+	t.Run("with Vice error", func(t *testing.T) {
+		for i, v := range vices {
+			err := New(v, "test")
+			if Is(err, NoVice) {
+				t.Errorf("%d element should be concrete Vice type", i)
+			}
+		}
+	})
+
+	t.Run("with NoVice error", func(t *testing.T) {
+		if !Is(errors.New("test"), NoVice) {
+			t.Errorf("Expected custom error to be NoVice")
+		}
+
+		if !Is(New(NoVice, "test"), NoVice) {
+			t.Errorf("Expected NoVice error to be NoVice")
+		}
+	})
 }
 
 func TestWrapNil(t *testing.T) {
