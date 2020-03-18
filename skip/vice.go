@@ -18,6 +18,7 @@ const (
 	NotFound
 	Internal
 	Canceled
+	PreconditionFailed
 )
 
 // implementations of all the error types
@@ -65,6 +66,10 @@ type canceledSeal struct{ sealError }
 
 func (canceledSeal) Canceled() bool { return true }
 
+type preconditionFailedSeal struct{ sealError }
+
+func (preconditionFailedSeal) PreconditionFailed() bool { return true }
+
 // wrapped implmentations of all the error types
 
 type timeoutWrap struct{ wrapError }
@@ -110,3 +115,7 @@ func (internalWrap) Internal() bool { return true }
 type canceledWrap struct{ wrapError }
 
 func (canceledWrap) Canceled() bool { return true }
+
+type preconditionFailedWrap struct{ wrapError }
+
+func (preconditionFailedWrap) PreconditionFailed() bool { return true }
