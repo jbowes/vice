@@ -121,6 +121,8 @@ func sealed(serr *sealError, v Vice, skip uint) error {
 		return &internalSeal{*serr}
 	case Canceled:
 		return &canceledSeal{*serr}
+	case PreconditionFailed:
+		return &preconditionFailedSeal{*serr}
 	default:
 		return serr
 	}
@@ -151,6 +153,8 @@ func wrapped(werr *wrapError, v Vice, skip uint) error {
 		return &internalWrap{*werr}
 	case Canceled:
 		return &canceledWrap{*werr}
+	case PreconditionFailed:
+		return &preconditionFailedWrap{*werr}
 	default:
 		return werr
 	}

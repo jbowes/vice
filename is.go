@@ -28,6 +28,8 @@ func Is(err error, v Vice) bool {
 		return isInternal(err)
 	case Canceled:
 		return isCanceled(err)
+	case PreconditionFailed:
+		return isPreconditionFailed(err)
 	case NoVice:
 		return isNoVice(err)
 	default:
@@ -119,6 +121,14 @@ func isCanceled(err error) bool {
 	var e interface{ Canceled() bool }
 	if xerrors.As(err, &e) {
 		return e.Canceled()
+	}
+	return false
+}
+
+func isPreconditionFailed(err error) bool {
+	var e interface{ PreconditionFailed() bool }
+	if xerrors.As(err, &e) {
+		return e.PreconditionFailed()
 	}
 	return false
 }

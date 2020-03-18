@@ -48,7 +48,9 @@ const (
 	// already exists.
 	Conflict
 
-	// InvalidArgument indicates the client provided bad input.
+	// InvalidArgument indicates the client provided bad input. This differs
+	// from PreconditionFailed as this is based on the given arguments rather
+	// than the state of the system. For example, an invalid HTTP scheme.
 	InvalidArgument
 
 	// NotFound indicates that a requested resource was not found.
@@ -61,6 +63,12 @@ const (
 	// Canceled means the operation has been canceled, typically by the
 	// consumer.
 	Canceled
+
+	// PreconditionFailed indicates that the state of the system does not meet the
+	// requirements to fulfull the request.
+	// For example, a directory to be deleted may be non-empty, an rmdir
+	// operation is applied to a non-directory, etc.
+	PreconditionFailed
 )
 
 // vices is a fixed length slice of Vice verbs used to iterate over them
@@ -77,4 +85,5 @@ var vices = [...]Vice{
 	NotFound,
 	Internal,
 	Canceled,
+	PreconditionFailed,
 }
