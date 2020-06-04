@@ -57,3 +57,25 @@ func Seal(err error, v Vice, text string) error {
 func Sealf(err error, v Vice, format string, a ...interface{}) error {
 	return skip.Sealf(err, skip.Vice(v), 1, format, a...)
 }
+
+// ForError returns a wrapped vice type found for the given error.
+//
+// This loops over all types to determine if the the error wraps that type. This
+// means this function is not deterministic if multiple `Wrap()` calls have been
+// used on the given error. To make sure it is deterministic, use the `Seal()`
+// method.
+//
+// If the error is not wrapped or sealed with this package, it will return
+// NoVice.
+//
+// This can be useful for map lookups to map specific types to descriptive
+// messages.
+func ForError(err error) Vice {
+	for _, v := range vices {
+		if Is(err, v) {
+			return v
+		}
+	}
+
+	return NoVice
+}
