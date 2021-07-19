@@ -1,15 +1,13 @@
 dist: xenial
 language: go
 
-# Force-enable Go modules. Also force go to use the code in vendor/
-# These will both be unnecessary when Go 1.13 lands.
 env:
   global:
     - GO111MODULE=on
 
 go:
-  - "1.12.x"
-  - "1.13.x"
+  - "1.16.x"
+  - "1.15.x"
 
 git:
   depth: 1
