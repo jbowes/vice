@@ -17,7 +17,7 @@ implement:
 	}
 */
 const (
-	// NoVice indicates there is an unkown error.
+	// NoVice indicates there is an unknown error.
 	NoVice Vice = 0
 
 	// Timeout means the operation has timed out before the end of the
