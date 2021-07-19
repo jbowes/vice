@@ -9,7 +9,7 @@
 <div align="center">
   <a href="https://godoc.org/github.com/jbowes/vice"><img src="https://godoc.org/github.com/jbowes/vice?status.svg" alt="GoDoc"></a>
   <img alt="Alpha Quality" src="https://img.shields.io/badge/status-ALPHA-orange.svg" >
-  <a href="https://travis-ci.com/jbowes/vice"><img alt="Build Status" src="https://travis-ci.com/jbowes/vice.svg?branch=master"></a>
+  <a href="https://github.com/jbowes/vice/actions/workflows/go.yml"><img alt="Build Status" src="https://github.com/jbowes/vice/actions/workflows/go.yml/badge.svg?branch=main"></a>
   <a href="https://github.com/jbowes/vice/releases/latest"><img alt="GitHub tag" src="https://img.shields.io/github/tag/jbowes/vice.svg"></a>
   <a href="./LICENSE"><img alt="BSD license" src="https://img.shields.io/badge/license-BSD-blue.svg"></a>
   <a href="https://codecov.io/gh/jbowes/vice"><img alt="codecov" src="https://img.shields.io/codecov/c/github/jbowes/vice.svg"></a>
