@@ -1,6 +1,6 @@
 package vice
 
-import "golang.org/x/xerrors"
+import "errors"
 
 // Is reports whether any error in err's chain implements the behaviour
 // described by the provided Vice, v.
@@ -39,7 +39,7 @@ func Is(err error, v Vice) bool {
 
 func isTimeout(err error) bool {
 	var e interface{ Timeout() bool }
-	if xerrors.As(err, &e) {
+	if errors.As(err, &e) {
 		return e.Timeout()
 	}
 	return false
@@ -47,7 +47,7 @@ func isTimeout(err error) bool {
 
 func isTemporary(err error) bool {
 	var e interface{ Temporary() bool }
-	if xerrors.As(err, &e) {
+	if errors.As(err, &e) {
 		return e.Temporary()
 	}
 	return false
@@ -55,7 +55,7 @@ func isTemporary(err error) bool {
 
 func isClosed(err error) bool {
 	var e interface{ Closed() bool }
-	if xerrors.As(err, &e) {
+	if errors.As(err, &e) {
 		return e.Closed()
 	}
 	return false
@@ -63,7 +63,7 @@ func isClosed(err error) bool {
 
 func isAuthRequired(err error) bool {
 	var e interface{ AuthRequired() bool }
-	if xerrors.As(err, &e) {
+	if errors.As(err, &e) {
 		return e.AuthRequired()
 	}
 	return false
@@ -71,7 +71,7 @@ func isAuthRequired(err error) bool {
 
 func isAuthFailed(err error) bool {
 	var e interface{ AuthFailed() bool }
-	if xerrors.As(err, &e) {
+	if errors.As(err, &e) {
 		return e.AuthFailed()
 	}
 	return false
@@ -79,7 +79,7 @@ func isAuthFailed(err error) bool {
 
 func isPermission(err error) bool {
 	var e interface{ Permission() bool }
-	if xerrors.As(err, &e) {
+	if errors.As(err, &e) {
 		return e.Permission()
 	}
 	return false
@@ -87,7 +87,7 @@ func isPermission(err error) bool {
 
 func isConflict(err error) bool {
 	var e interface{ Conflict() bool }
-	if xerrors.As(err, &e) {
+	if errors.As(err, &e) {
 		return e.Conflict()
 	}
 	return false
@@ -95,7 +95,7 @@ func isConflict(err error) bool {
 
 func isInvalidArgument(err error) bool {
 	var e interface{ InvalidArgument() bool }
-	if xerrors.As(err, &e) {
+	if errors.As(err, &e) {
 		return e.InvalidArgument()
 	}
 	return false
@@ -103,7 +103,7 @@ func isInvalidArgument(err error) bool {
 
 func isNotFound(err error) bool {
 	var e interface{ NotFound() bool }
-	if xerrors.As(err, &e) {
+	if errors.As(err, &e) {
 		return e.NotFound()
 	}
 	return false
@@ -111,7 +111,7 @@ func isNotFound(err error) bool {
 
 func isInternal(err error) bool {
 	var e interface{ Internal() bool }
-	if xerrors.As(err, &e) {
+	if errors.As(err, &e) {
 		return e.Internal()
 	}
 	return false
@@ -119,7 +119,7 @@ func isInternal(err error) bool {
 
 func isCanceled(err error) bool {
 	var e interface{ Canceled() bool }
-	if xerrors.As(err, &e) {
+	if errors.As(err, &e) {
 		return e.Canceled()
 	}
 	return false
@@ -127,7 +127,7 @@ func isCanceled(err error) bool {
 
 func isPreconditionFailed(err error) bool {
 	var e interface{ PreconditionFailed() bool }
-	if xerrors.As(err, &e) {
+	if errors.As(err, &e) {
 		return e.PreconditionFailed()
 	}
 	return false
