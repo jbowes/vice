@@ -72,7 +72,7 @@ if vice.Is(err, vice.NotFound) {
 ### Building APIs on `vice`
 
 `vice/skip` implements the `vice` API with an additional `skip` argument,
-allowing creation of APIs on top of `vice` that will no report themselves in
+allowing creation of APIs on top of `vice` that will not report themselves in
 error caller frames.
 
 
