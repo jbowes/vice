@@ -36,7 +36,7 @@ func Errorf(v Vice, skip uint, format string, a ...interface{}) error {
 // skip over. Caller(0) returns the frame for the caller of Wrap. If err is
 // nil, Wrap returns nil.
 //
-// The error returned implments the Unwrap method, for programatically
+// The error returned implements the Unwrap method, for programatically
 // extracting the error chain.
 //
 // This func is intended to be used for implementing APIs on top of vice.
@@ -53,7 +53,7 @@ func Wrap(err error, v Vice, skip uint, text string) error {
 // skip over. Caller(0) returns the frame for the caller of Wrapf. If err is
 // nil, Wrapf returns nil.
 //
-// The error returned implments the Unwrap method, for programatically
+// The error returned implements the Unwrap method, for programatically
 // extracting the error chain.
 //
 // This func is intended to be used for implementing APIs on top of vice.
@@ -70,7 +70,7 @@ func Wrapf(err error, v Vice, skip uint, format string, a ...interface{}) error 
 // skip over. Caller(0) returns the frame for the caller of Seal. If err is
 // nil, Seal returns nil.
 //
-// The error returned does not implment the Unwrap method.
+// The error returned does not implement the Unwrap method.
 //
 // This func is intended to be used for implementing APIs on top of vice.
 func Seal(err error, v Vice, skip uint, text string) error {
@@ -86,7 +86,7 @@ func Seal(err error, v Vice, skip uint, text string) error {
 // skip over. Caller(0) returns the frame for the caller of Sealf. If err is
 // nil, Sealfreturns nil.
 //
-// The error returned does not implment the Unwrap method.
+// The error returned does not implement the Unwrap method.
 //
 // This func is intended to be used for implementing APIs on top of vice.
 func Sealf(err error, v Vice, skip uint, format string, a ...interface{}) error {
