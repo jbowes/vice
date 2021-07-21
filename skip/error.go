@@ -1,10 +1,6 @@
 package skip
 
-import (
-	"fmt"
-
-	"golang.org/x/xerrors"
-)
+import "fmt"
 
 // New returns an error that formats as the given text, and implements the
 // behaviour described by the given Vice. The argument skip is the number of
@@ -97,7 +93,7 @@ func Sealf(err error, v Vice, skip uint, format string, a ...interface{}) error 
 }
 
 func sealed(serr *sealError, v Vice, skip uint) error {
-	serr.frame = xerrors.Caller(int(2 + skip))
+	serr.frame = caller(int(2 + skip))
 	switch v {
 	case Timeout:
 		return &timeoutSeal{*serr}
@@ -129,7 +125,7 @@ func sealed(serr *sealError, v Vice, skip uint) error {
 }
 
 func wrapped(werr *wrapError, v Vice, skip uint) error {
-	werr.frame = xerrors.Caller(int(2 + skip))
+	werr.frame = caller(int(2 + skip))
 	switch v {
 	case Timeout:
 		return &timeoutWrap{*werr}
@@ -163,17 +159,10 @@ func wrapped(werr *wrapError, v Vice, skip uint) error {
 type sealError struct {
 	msg   string
 	err   error
-	frame xerrors.Frame
+	frame frame
 }
 
-func (e *sealError) Error() string              { return fmt.Sprint(e) }
-func (e *sealError) Format(s fmt.State, v rune) { xerrors.FormatError(e, s, v) }
-
-func (e *sealError) FormatError(p xerrors.Printer) (next error) {
-	p.Print(e.msg)
-	e.frame.Format(p)
-	return e.err
-}
+func (e *sealError) Error() string { return fmt.Sprint(e) }
 
 type wrapError struct {
 	sealError
