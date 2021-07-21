@@ -48,7 +48,7 @@ For complete examples and usage, see the [GoDoc documentation](https://godoc.org
 `vice` defines common types of errors, as seen in existing packages, as expressed
 through methods on the errors of the form:
 ```go
-IsXXX() bool
+BehaviourName() bool // returns true
 ```
 
 Errors of these types can be created and checked by vice. When used with Go 2
